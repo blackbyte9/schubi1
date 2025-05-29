@@ -21,7 +21,9 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
-      "@/auth": ["lib/auth"]
+      "@/auth": ["lib/auth"],
+      "@/auth/*": ["lib/auth/*"],
+      "@/component/*": ["component/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

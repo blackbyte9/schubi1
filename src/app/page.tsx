@@ -1,4 +1,5 @@
 import { auth } from "@/auth";
+import AuthButton from "@/component/auth/AuthButton.server";
 
 export default async function Home() {
   const session = await auth();
@@ -7,6 +8,7 @@ export default async function Home() {
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
         <h1>Schulbuch Bibliothek - Main</h1>
         <pre>{JSON.stringify(session, null, 2)}  </pre>
+        <AuthButton />
       </main>
       <footer className="flex flex-col gap-4 items-center justify-center row-start-3">
         Schubi Vöhringen
