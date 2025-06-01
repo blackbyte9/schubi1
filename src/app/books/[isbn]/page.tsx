@@ -1,12 +1,7 @@
 import { prisma } from '@/prisma';
 
-interface BookPageProps {
-    params: {
-        isbn: string | string[];
-    };
-}
-
-const Book = async ({params: {isbn}}: BookPageProps) => {
+export default async function Page ({ params }: { params: { isbn: string | string[] } }) {
+    const { isbn } = await params
     const book = await prisma.book.findFirst({
         where: {
             isbn: Array.isArray(isbn)
@@ -21,5 +16,3 @@ const Book = async ({params: {isbn}}: BookPageProps) => {
         </div>
     );
 };
-
-export default Book;
