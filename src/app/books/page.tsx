@@ -1,4 +1,6 @@
+import { DataTable } from '@/component/books/table/data-table';
 import { prisma } from '@/prisma';
+import { columns } from '../../component/books/table/columns';
 
 const Home = async () => {
     const books = await prisma.book.findMany();
@@ -6,15 +8,7 @@ const Home = async () => {
     return (
         <div>
             <h2>Books</h2>
-            <ul>
-                {books
-                    .sort((a, b) => a.name.localeCompare(b.name))
-                    .map((book) => (
-                        <li key={book.isbn}>
-                            <div>({book.isbn}) {book.name}</div>
-                        </li>
-                    ))}
-            </ul>
+            <DataTable columns={columns} data={books} />
         </div>
     );
 };
