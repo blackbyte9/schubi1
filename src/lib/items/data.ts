@@ -22,3 +22,15 @@ export async function getItemById(id: string): Promise<Item | null> {
   // Map DB fields to Item type
   return item ? { isbn: item.isbn, id: item.id, status: item.status as Status } : null;
 }
+
+export async function getItemsByIsbn(isbn: string): Promise<Item[]> {
+  const items = await prisma.item.findMany({
+    where: { isbn, status: { not: Status.REMOVED } },
+  });
+  // Map DB fields to Item type
+  return items.map(({ id, status }) => ({
+    isbn,
+    id,
+    status: status as Status
+  }));
+}
