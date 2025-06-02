@@ -1,16 +1,11 @@
-import { prisma } from '@/prisma';
-
-//TODO: get books from data.ts
+import { getBookByIsbn } from '@/lib/books/data';
 
 export default async function Page ({ params }: { params: { isbn: string | string[] } }) {
     const { isbn } = await params
-    const book = await prisma.book.findFirst({
-        where: {
-            isbn: Array.isArray(isbn)
-                ? isbn[0]
-                : isbn,
-        },
-    });
+    const book = await getBookByIsbn(isbn as string);
+    if (!book) {
+        return <div>Book not found</div>;
+    }
 
     return (
         <div>

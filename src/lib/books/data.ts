@@ -6,3 +6,11 @@ export async function getBooks(): Promise<Book[]> {
   // Map DB fields to Book type
   return dbBooks.map(({ isbn, name }) => ({ isbn, name }));
 }
+
+export async function getBookByIsbn(isbn: string): Promise<Book | null> {
+  const dbBook = await prisma.book.findUnique({
+    where: { isbn },
+  });
+  // Map DB fields to Book type
+  return dbBook ? { isbn: dbBook.isbn, name: dbBook.name } : null;
+}

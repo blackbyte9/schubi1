@@ -14,3 +14,11 @@ export async function getItems(): Promise<Item[]> {
     status: status as Status
   }));
 }
+
+export async function getItemById(id: string): Promise<Item | null> {
+  const item = await prisma.item.findUnique({
+    where: { id },
+  });
+  // Map DB fields to Item type
+  return item ? { isbn: item.isbn, id: item.id, status: item.status as Status } : null;
+}
