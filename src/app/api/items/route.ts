@@ -1,10 +1,10 @@
 import { auth } from "@/auth"
-import { getBooks } from "@/lib/books/data";
+import { getItems } from "@/lib/items/data";
 
 export const GET = auth(async (req) => {
   if (req.auth) {
-    const books = await getBooks();
-    return Response.json(books.sort((a, b) => a.isbn.localeCompare(b.isbn)));
+    const items = await getItems();
+    return Response.json(items.sort((a, b) => a.id.localeCompare(b.id)));
   }
 
   return Response.json({ message: "Not authenticated" }, { status: 401 })

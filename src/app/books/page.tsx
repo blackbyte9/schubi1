@@ -1,9 +1,9 @@
 import { DataTable } from '@/component/books/table/data-table';
-import { prisma } from '@/prisma';
-import { columns } from '../../component/books/table/columns';
+import { columns } from '@/component/books/table/columns';
+import { getBooks } from '@/lib/books/data';
 
 const Home = async () => {
-    const books = await prisma.book.findMany();
+    const books = await getBooks();
 
     return (
         <div>

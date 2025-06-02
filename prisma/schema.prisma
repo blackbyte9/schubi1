@@ -11,7 +11,26 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// ===== Models =====
+
+enum Status {
+  REMOVED
+  NEW
+  USED
+  DAMAGED
+}
+
 model Book {
-  isbn String @id @unique
-  name String
+  isbn  String @id @unique
+  name  String
+  items Item[]
+}
+
+model Item {
+  id        String   @id @unique
+  book      Book     @relation(fields: [isbn], references: [isbn])
+  isbn      String
+  status    Status   @default(NEW)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
