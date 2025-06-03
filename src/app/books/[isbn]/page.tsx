@@ -14,6 +14,7 @@ export default async function Page ({ params }: { params: { isbn: string | strin
     return (
         <div>
             <h2>{book?.name} ({book?.isbn})</h2>
+            <div>Count of Items: {book.itemCount}</div>
             <DataTable columns={columns} data={items ?? []} />
         </div>
     );
