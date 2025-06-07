@@ -16,4 +16,8 @@ export const columns: ColumnDef<Book>[] = [
     accessorKey: "itemCount",
     header: "Items",
   },
+  {
+    accessorKey: "leasedCount",
+    header: "Leased items",
+  },
 ]

@@ -54,3 +54,21 @@ export async function getItemsByIsbn(isbn: string): Promise<Item[]> {
     leased: Borrow.length > 0
   }));
 }
+
+export async function getLeasedItemsByIsbn(isbn: string): Promise<Item[]> {
+  const items = await prisma.item.findMany({
+    where: {
+      isbn,
+      status: { not: Status.REMOVED },
+      Borrow: {
+        some: { active: true }
+      }
+    },
+  });
+  // Map DB fields to Item type
+  return items.map(({ id, status }) => ({
+    isbn,
+    id,
+    status: status as Status
+  }));
+}
