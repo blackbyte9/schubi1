@@ -3,6 +3,7 @@ import * as fs from "fs";
 const items = fs.readFileSync("./data/items.txt", "utf-8");
 const itemList = items.split("\r\n");
 
+fs.appendFileSync("./data/items.json", "[\r\n");
 itemList.forEach((item) => {
   item = item.trim();
   const itemParts = item.split(/\s+/);
@@ -16,8 +17,10 @@ itemList.forEach((item) => {
   const itemData = {
     id: id,
     status: status,
-    book: book,
+    bookId: book,
   };
 
-  fs.appendFileSync("./data/items.json", JSON.stringify(itemData) + "\n");
+  fs.appendFileSync("./data/items.json", JSON.stringify(itemData) + ",\r\n");
 });
+fs.appendFileSync("./data/items.json", "]\r\n");
+console.log("Items data conversion completed successfully.");

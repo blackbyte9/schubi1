@@ -1,5 +1,12 @@
 {
     "cSpell.words": [
+        "firstname",
+        "lastname",
         "Schubi"
+    ],
+    "WillLuke.nextjs.addTypesOnSave": true,
+    "WillLuke.nextjs.hasPrompted": true,
+    "cSpell.ignorePaths": [
+        "data/**"
     ]
 }

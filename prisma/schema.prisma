@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
   output   = "../src/generated/prisma"
@@ -11,15 +8,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// ===== Models =====
-
-enum Status {
-  REMOVED
-  NEW
-  USED
-  DAMAGED
-}
-
 model Book {
   isbn  String @id @unique
   name  String
@@ -28,9 +16,29 @@ model Book {
 
 model Item {
   id        String   @id @unique
-  book      Book     @relation(fields: [isbn], references: [isbn])
   isbn      String
-  status    Status   @default(NEW)
+  status    String   @default("NEW")
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  Borrow    Borrow[]
+  book      Book     @relation(fields: [isbn], references: [isbn])
+}
+
+model Student {
+  id        Int      @id @unique @default(autoincrement())
+  lastname  String
+  firstname String
+  course    String?
+  idOld     Int?
+  Borrow    Borrow[]
+}
+
+model Borrow {
+  id        Int       @id @unique @default(autoincrement())
+  itemId    String
+  studentId Int
+  active    Boolean   @default(true)
+  leased    DateTime  @default(now())
+  returned  DateTime?
+  item      Item      @relation(fields: [itemId], references: [id])
+  student   Student   @relation(fields: [studentId], references: [id])
 }
