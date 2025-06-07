@@ -1,6 +1,6 @@
 import { getItemById } from '@/lib/items/data';
 
-export default async function Page ({ params }: { params: { id: string | string[] } }) {
+export default async function Page({ params }: { params: { id: string | string[] } }) {
     const { id } = await params
     const item = await getItemById(id as string);
     if (!item) {
@@ -10,6 +10,7 @@ export default async function Page ({ params }: { params: { id: string | string[
     return (
         <div>
             <h2>{item?.id} ({item?.isbn}) ... Status {item.status}</h2>
+            <p>Leased: {item.leased ? 'Yes' : 'No'}</p>
         </div>
     );
 };

@@ -10,4 +10,5 @@ export type Item = {
     isbn: string;
     id: string;
     status: Status;
+    leased?: boolean;
 };

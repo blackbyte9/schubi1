@@ -19,7 +19,7 @@ export const columns: ColumnDef<Item>[] = [
     header: "Status",
   },
   {
-    accessorKey: "leaseCount",
-    header: "Lease Count",
+    accessorKey: "leased",
+    header: "Leased",
   },
 ]
