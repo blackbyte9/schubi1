@@ -7,7 +7,7 @@ export async function getItems(): Promise<Item[]> {
       status: { not: Status.REMOVED }
     },
   });
-  // Map DB fields to Book type
+  // Map DB fields to item type
   return items.map(({ isbn, id, status }) => ({
     isbn,
     id,
