@@ -63,6 +63,7 @@ const seedStudents = async () => {
                 idOld: +(student.idOld),
                 firstname: student.firstname,
                 lastname: student.lastname,
+                course: student.course,
             }
         });
         cnt++;
