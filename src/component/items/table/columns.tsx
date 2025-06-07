@@ -3,6 +3,8 @@
 import { ColumnDef } from "@tanstack/react-table"
 import { Item } from "lib/items/types"
 
+
+
 export const columns: ColumnDef<Item>[] = [
   {
     accessorKey: "id",
@@ -15,5 +17,9 @@ export const columns: ColumnDef<Item>[] = [
   {
     accessorKey: "status",
     header: "Status",
+  },
+  {
+    accessorKey: "leaseCount",
+    header: "Lease Count",
   },
 ]

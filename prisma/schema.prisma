@@ -8,6 +8,15 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// ===== ENUMS =====
+enum Status {
+  REMOVED
+  NEW
+  USED
+  DAMAGED
+}
+
+// ===== Models =====
 model Book {
   isbn  String @id @unique
   name  String
@@ -17,7 +26,7 @@ model Book {
 model Item {
   id        String   @id @unique
   isbn      String
-  status    String   @default("NEW")
+  status    Status   @default(NEW)
   createdAt DateTime @default(now())
   Borrow    Borrow[]
   book      Book     @relation(fields: [isbn], references: [isbn])

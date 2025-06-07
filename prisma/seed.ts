@@ -9,16 +9,16 @@ import { Status } from '@/lib/items/types';
 
 const prisma = new PrismaClient();
 
-const seed = async () => {
-    // clean up before the seeding (option)
+const seedInit = async () => {
+    console.log("Cleanup DB before seeding...");
     await prisma.borrow.deleteMany();
     await prisma.item.deleteMany();
     await prisma.book.deleteMany();
     await prisma.student.deleteMany();
+}
 
-    // you could also use createMany
-    // but it is not supported for databases
-    // e.g. SQLite https://github.com/prisma/prisma/issues/10710
+const seedBooks = async () => {
+    console.log("Seeding books...");
     let cnt = 0;
     for (const book of books) {
         await prisma.book.create({
@@ -27,48 +27,36 @@ const seed = async () => {
         cnt++;
     }
     console.log("Seeded books:", cnt);
-    cnt = 0;
+}
 
+const seedItems = async () => {
+    console.log("Seeding items...");
+    let cnt = 0;
     for (const item of items) {
-        try {
-            await prisma.item.create({
-                data: {
-                    id: item.id,
-                    status: item.status as Status,
-                    book: {
-                        connect: {
+        await prisma.item.create({
+            data: {
+                id: item.id,
+                status: item.status as Status,
+                book: {
+                    connectOrCreate: {
+                        where: { isbn: item.bookId },
+                        create: {
+                            name: "Unknown Book", // Fallback if bookName is not provided
                             isbn: item.bookId,
-                        },
+                        }
                     },
                 },
-            });
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        } catch (error) {
-            await prisma.book.upsert({
-                where: { isbn: item.bookId },
-                update: {},
-                create: {
-                    isbn: item.bookId,
-                    name: "unknown",
-                },
-            });
-            await prisma.item.create({
-                data: {
-                    id: item.id,
-                    status: item.status as Status,
-                    book: {
-                        connect: {
-                            isbn: item.bookId,
-                        },
-                    },
-                },
-            });
-        }
+            }
+        });
         cnt++;
     }
     console.log("Seeded items:", cnt);
     cnt = 0;
+}
 
+const seedStudents = async () => {
+    console.log("Seeding students...");
+    let cnt = 0;
     for (const student of students) {
         await prisma.student.create({
             data: {
@@ -80,8 +68,11 @@ const seed = async () => {
         cnt++;
     }
     console.log("Seeded students:", cnt);
-    cnt = 0;
+}
 
+const seedLeases = async () => {
+    console.log("Seeding leases...");
+    let cnt = 0;
     for (const lease of leases) {
         const student = await prisma.student.findFirst({
             where: {
@@ -129,6 +120,16 @@ const seed = async () => {
         cnt++;
     }
     console.log("Seeded leases:", cnt);
+}
+
+const seed = async () => {
+    await seedInit();
+    
+    await seedBooks();
+    await seedItems();
+    await seedStudents();
+    await seedLeases();
+    console.log("Seeding completed.");
 };
 
 seed();
