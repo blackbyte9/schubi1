@@ -1,11 +1,16 @@
 "use client"
 
+
+import * as React from "react"
+
 import {
   ColumnDef,
   flexRender,
   getCoreRowModel,
   getPaginationRowModel,
+  getSortedRowModel,
   Row,
+  SortingState,
   useReactTable,
 } from "@tanstack/react-table"
 
@@ -37,14 +42,19 @@ export function DataTable<TData, TValue>({
     pageIndex: 0, //initial page index
     pageSize: 10, //default page size
   });
+  const [sorting, setSorting] = React.useState<SortingState>([]);
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    onSortingChange: setSorting,
     getPaginationRowModel: getPaginationRowModel(),
     onPaginationChange: setPagination,
+    //initialState: { columnVisibility: { id: false } }, // This is not working for items table
     state: {
       pagination,
+      sorting
     },
   })
 
