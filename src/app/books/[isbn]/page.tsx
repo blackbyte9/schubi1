@@ -1,20 +1,14 @@
+import { BookDetailCard } from '@/component/books/detail/card';
 import { ItemTable } from '@/component/items/table/data-table';
-import { getBookByIsbn } from '@/lib/books/data';
 import { getItemsByIsbn } from '@/lib/items/data';
 
-export default async function Page({ params }: { params: { isbn: string | string[] } }) {
-    const { isbn } = await params
-    const book = await getBookByIsbn(isbn as string);
-    if (!book) {
-        return <div>Book not found</div>;
-    }
-    const items = await getItemsByIsbn(book.isbn);
+export default async function Page({ params }: { params: { isbn: string } }) {
+    const { isbn } = await params;
+    const items = await getItemsByIsbn(isbn);
 
     return (
         <div>
-            <h2>{book?.name} ({book?.isbn})</h2>
-            <div>Count of Items: {book.itemCount}</div>
-            <div>Count of leased Items: {book.leasedCount}</div>
+            <BookDetailCard params={{ isbn: isbn }} />
             <ItemTable data={items ?? []} />
         </div>
     );
