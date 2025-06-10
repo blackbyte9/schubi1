@@ -1,87 +1,23 @@
 "use client"
 
-import {
-  ColumnDef,
-  flexRender,
-  getCoreRowModel,
-  useReactTable,
-} from "@tanstack/react-table"
+import { columns } from "@/component/leases/table/columns"
+import { DataTable } from "@/component/table/dataTable"
+import { Lease } from "@/lib/leases/types"
 
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table"
-import { useRouter } from "next/navigation"
-
-interface DataTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[]
-  data: TData[]
+interface LeaseTableProps<TData> {
+  data: TData extends Lease[] ? TData : Lease[]
 }
 
-export function DataTable<TData, TValue>({
-  columns,
+export function LeaseTable<TData extends Lease[]>( {
   data,
-}: DataTableProps<TData, TValue>) {
-  const router = useRouter()
-  const table = useReactTable({
-    data,
-    columns,
-    getCoreRowModel: getCoreRowModel(),
-  })
-
+}: LeaseTableProps<TData> ) {
   return (
-    <div className="rounded-md border">
-      <Table>
-        <TableHeader>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <TableRow key={headerGroup.id}>
-              {headerGroup.headers.map((header) => {
-                return (
-                  <TableHead key={header.id}>
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
-                        header.column.columnDef.header,
-                        header.getContext()
-                      )}
-                  </TableHead>
-                )
-              })}
-            </TableRow>
-          ))}
-        </TableHeader>
-        <TableBody>
-          {table.getRowModel().rows?.length ? (
-            table.getRowModel().rows.map((row) => (
-              <TableRow
-                key={row.id}
-                data-state={row.getIsSelected() && "selected"}
-                onClick={() => {
-                  const original = row.original as Record<string, unknown>
-                  router.push(`/students/${(original as { id: string }).id}`)
-                }
-                }
-              >
-                {row.getVisibleCells().map((cell) => (
-                  <TableCell key={cell.id}>
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </TableCell>
-                ))}
-              </TableRow>
-            ))
-          ) : (
-            <TableRow>
-              <TableCell colSpan={columns.length} className="h-24 text-center">
-                No results.
-              </TableCell>
-            </TableRow>
-          )}
-        </TableBody>
-      </Table>
-    </div>
+    <DataTable columns={columns}
+      data={data}
+      rowClickHandler={(row) => {
+        const original = row.original as Record<string, unknown>
+        return `/items/${(original as { item: string }).item}` // Adjust the path as needed
+      }}  />
+    
   )
 }
