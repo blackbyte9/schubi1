@@ -7,6 +7,7 @@ import {
   ColumnDef,
   flexRender,
   getCoreRowModel,
+  getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
   Row,
@@ -25,6 +26,7 @@ import {
 import { useRouter } from "next/navigation"
 import { DataTablePagination } from "./pagination"
 import { useState } from "react"
+import { Input } from "@/components/ui/input"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -43,6 +45,7 @@ export function DataTable<TData, TValue>({
     pageSize: 10, //default page size
   });
   const [sorting, setSorting] = React.useState<SortingState>([]);
+  const [globalFilter, setGlobalFilter] = useState<string>("");
   const table = useReactTable({
     data,
     columns,
@@ -51,15 +54,26 @@ export function DataTable<TData, TValue>({
     onSortingChange: setSorting,
     getPaginationRowModel: getPaginationRowModel(),
     onPaginationChange: setPagination,
+    getFilteredRowModel: getFilteredRowModel(),
+    onGlobalFilterChange: setGlobalFilter,
+    globalFilterFn: "includesString",
     //initialState: { columnVisibility: { id: false } }, // This is not working for items table
     state: {
       pagination,
-      sorting
+      sorting,
+      globalFilter,
     },
   })
 
   return (
     <div className="rounded-md border">
+      <div>
+        <Input
+          value={table.getState().globalFilter ?? ""}
+          onChange={e => table.setGlobalFilter(String(e.target.value))}
+          placeholder="Search..."
+        />
+      </div>
       <Table>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
