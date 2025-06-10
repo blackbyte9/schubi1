@@ -1,4 +1,6 @@
+import { LeaseTable } from '@/component/leases/table/data-table';
 import { getItemById } from '@/lib/items/data';
+import { getLeasesByItem } from '@/lib/leases/data';
 
 export default async function Page({ params }: { params: { id: string | string[] } }) {
     const { id } = await params
@@ -6,11 +8,13 @@ export default async function Page({ params }: { params: { id: string | string[]
     if (!item) {
         return <div>Item not found</div>;
     }
+    const leases = await getLeasesByItem(Array.isArray(id) ? id[0] : id);
 
     return (
         <div>
             <h2>{item?.id} ({item?.isbn}) ... Status {item.status}</h2>
             <p>Leased: {item.leased ? 'Yes' : 'No'}</p>
+            <LeaseTable data={leases ?? []} />
         </div>
     );
 };

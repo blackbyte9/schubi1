@@ -1,5 +1,4 @@
-import { DataTable } from '@/component/items/table/data-table';
-import { columns } from '@/component/items/table/columns';
+import { ItemTable } from '@/component/items/table/data-table';
 import { getItems } from '@/lib/items/data';
 
 const Items = async () => {
@@ -8,7 +7,7 @@ const Items = async () => {
     return (
         <div>
             <h2>Items</h2>
-            <DataTable columns={columns} data={items} />
+            <ItemTable data={items} />
         </div>
     );
 };

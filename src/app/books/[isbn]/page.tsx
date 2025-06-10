@@ -1,5 +1,4 @@
-import { columns } from '@/component/items/table/columns';
-import { DataTable } from '@/component/items/table/data-table';
+import { ItemTable } from '@/component/items/table/data-table';
 import { getBookByIsbn } from '@/lib/books/data';
 import { getItemsByIsbn } from '@/lib/items/data';
 
@@ -16,7 +15,7 @@ export default async function Page({ params }: { params: { isbn: string | string
             <h2>{book?.name} ({book?.isbn})</h2>
             <div>Count of Items: {book.itemCount}</div>
             <div>Count of leased Items: {book.leasedCount}</div>
-            <DataTable columns={columns} data={items ?? []} />
+            <ItemTable data={items ?? []} />
         </div>
     );
 };

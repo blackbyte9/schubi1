@@ -1,5 +1,4 @@
-import { DataTable } from '@/component/books/table/data-table';
-import { columns } from '@/component/books/table/columns';
+import { BookTable } from '@/component/books/table/data-table';
 import { getBooks } from '@/lib/books/data';
 
 const Home = async () => {
@@ -8,7 +7,7 @@ const Home = async () => {
     return (
         <div>
             <h2>Books</h2>
-            <DataTable columns={columns} data={books} />
+            <BookTable data={books} />
         </div>
     );
 };

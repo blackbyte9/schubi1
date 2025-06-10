@@ -1,14 +1,15 @@
-import { DataTable } from '@/component/students/table/data-table';
-import { columns } from '@/component/students/table/columns';
+import { StudentTable } from '@/component/students/table/data-table';
 import { getStudents } from '@/lib/students/data';
 
 const Students = async () => {
     const students = await getStudents();
-
+    if (!students) {
+        return <div>No students found</div>;
+    }
     return (
         <div>
-            <h2>Items</h2>
-            <DataTable columns={columns} data={students} />
+            <h2>Students</h2>
+            <StudentTable data={students} />
         </div>
     );
 };
