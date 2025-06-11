@@ -1,3 +1,5 @@
+"use server";
+
 import { prisma } from "../prisma";
 import { Book } from "./types";
 import { Status } from "../items/types";
