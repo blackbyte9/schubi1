@@ -8,9 +8,10 @@ export async function BookDetailCard({ params }: { params: { isbn: string | stri
     if (!book) {
         return <div className="p-4">Book not found</div>;
     }
+    const title = await BookTitle(book?.isbn, book?.name);
     return (
         <div className="p-4">
-            <DetailCard title={BookTitle(book?.isbn, book?.name)}>
+            <DetailCard title={title}>
                 <div>Count of Items: {book?.itemCount}</div>
                 <div>Count of leased Items: {book?.leasedCount}</div>
             </DetailCard>
