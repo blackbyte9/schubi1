@@ -1,3 +1,5 @@
+import { BookTitle } from '@/component/books/title';
+import { ItemDetailCard } from '@/component/items/detail/card';
 import { LeaseTable } from '@/component/leases/table/data-table';
 import { getItemById } from '@/lib/items/data';
 import { getLeasesByItem } from '@/lib/leases/data';
@@ -12,7 +14,9 @@ export default async function Page({ params }: { params: { id: string | string[]
 
     return (
         <div>
+            <ItemDetailCard params={{ id: id }} />
             <h2>{item?.id} ({item?.isbn}) ... Status {item.status}</h2>
+            <p> {BookTitle(item.isbn)}</p>
             <p>Leased: {item.leased ? 'Yes' : 'No'}</p>
             <LeaseTable data={leases ?? []} />
         </div>

@@ -1,6 +1,11 @@
+import { getBookByIsbn } from "@/lib/books/data";
 
 
-export function BookTitle(isbn: string | undefined, title: string | undefined): string {
+export async function BookTitle(isbn: string, title?: string): Promise<string> {
+    if (title === undefined || title.length === 0) {
+        const book = await getBookByIsbn(isbn);
+        title = book?.name;
+    }
     return (
         ` ${title} (${isbn})`
     );
