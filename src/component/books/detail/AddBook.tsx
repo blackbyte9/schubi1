@@ -24,9 +24,6 @@ export function AddBookDialog() {
         };
         await createBook(book);
         onBookCreated();
-        //if (props.onBookCreated) {
-        //    props.onBookCreated();
-        //}
     };
 
     return (

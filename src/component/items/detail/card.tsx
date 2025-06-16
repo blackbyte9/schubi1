@@ -1,12 +1,12 @@
 import { BookTitle } from "@/component/books/title";
 import { DetailCard } from "@/component/detail/card";
-import { getItemById } from "@/lib/items/data";
+import { readItemById } from "@/lib/items/read";
 import { ItemTitle } from "../title";
 
 export async function ItemDetailCard({ params }: { params: { id: string | string[] } }) {
     const { id } = await params
 
-    const item = await getItemById(id as string);
+    const item = await readItemById(id as string);
     if (!item) {
         return <div>Item not found</div>;
     }

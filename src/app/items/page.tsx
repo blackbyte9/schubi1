@@ -1,8 +1,8 @@
 import { ItemTable } from '@/component/items/table/data-table';
-import { getItems } from '@/lib/items/data';
+import { readItems } from '@/lib/items/read';
 
 const Items = async () => {
-    const items = await getItems();
+    const items = await readItems();
 
     return (
         <div>

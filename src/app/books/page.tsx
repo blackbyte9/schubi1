@@ -1,10 +1,10 @@
 import { AddBookDialog } from '@/component/books/detail/AddBook';
 import { BookTable } from '@/component/books/table/data-table';
-import { getBooks } from '@/lib/books/data';
+import { readBooks } from '@/lib/books/read';
 
 export default async function Page() {
 
-    const books = await getBooks();
+    const books = await readBooks();
 
     return (
         <div>

@@ -1,9 +1,9 @@
 import { auth } from "@/auth"
-import { getBooks } from "@/lib/books/data";
+import { readBooks } from "@/lib/books/read";
 
 export const GET = auth(async (req) => {
   if (req.auth) {
-    const books = await getBooks();
+    const books = await readBooks();
     return Response.json(books.sort((a, b) => a.isbn.localeCompare(b.isbn)));
   }
 

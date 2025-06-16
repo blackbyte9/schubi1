@@ -1,6 +1,5 @@
 "use client"
 
-
 import { Button } from "@/components/ui/button"
 import {
     Dialog,
@@ -18,14 +17,11 @@ import { createItem } from "@/lib/items/create"
 import { FilePlus } from "lucide-react"
 
 export function AddItemDialog(props: {
-    onItemCreated?: () => void,
     isbn: string,
 }) {
     const handleSubmit = async (formData: FormData, isbn: string) => {
         await createItem(isbn, formData.get("id") as string);
-        if (props.onItemCreated) {
-            props.onItemCreated();
-        }
+        onItemCreated();
     };
 
     return (
@@ -53,12 +49,8 @@ export function AddItemDialog(props: {
                     </DialogHeader>
                     <div className="grid gap-4">
                         <div className="grid gap-3">
-                            <Label htmlFor="isbn">ISBN</Label>
-                            <Input id="isbn" name="isbn" defaultValue="" />
-                        </div>
-                        <div className="grid gap-3">
-                            <Label htmlFor="title">Title</Label>
-                            <Input id="title" name="title" defaultValue="" />
+                            <Label htmlFor="id">Item Id</Label>
+                            <Input id="id" name="id" defaultValue="" />
                         </div>
                     </div>
                     <DialogFooter>
@@ -73,4 +65,11 @@ export function AddItemDialog(props: {
             </DialogContent>
         </Dialog>
     )
+}
+
+function onItemCreated() {
+    // Refresh the page or data after a book is edited
+    if (typeof window !== "undefined") {
+        window.location.reload();
+    }
 }
