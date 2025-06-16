@@ -1,32 +1,18 @@
-"use client";
-
-import { useEffect, useState } from 'react';
 import { AddBookDialog } from '@/component/books/detail/AddBook';
 import { BookTable } from '@/component/books/table/data-table';
 import { getBooks } from '@/lib/books/data';
-import { Book } from '@/lib/books/types';
 
-const Home = () => {
-    const [books, setBooks] = useState<Book[]>([]);
-    const [reload, setReload] = useState(false);
+export default async function Page() {
 
-    useEffect(() => {
-        getBooks().then(setBooks);
-    }, [reload]);
-
-    const handleBookCreated = () => {
-        setReload(r => !r); // Toggle to trigger reload
-    };
+    const books = await getBooks();
 
     return (
         <div>
             <h2>Books</h2>
             <div className="flex justify-end mb-4">
-                <AddBookDialog onBookCreated={handleBookCreated} />
+                <AddBookDialog />
             </div>
             <BookTable data={books} />
         </div>
     );
 };
-
-export default Home;

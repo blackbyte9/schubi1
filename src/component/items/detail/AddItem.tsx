@@ -1,5 +1,6 @@
 "use client"
 
+
 import { Button } from "@/components/ui/button"
 import {
     Dialog,
@@ -13,20 +14,18 @@ import {
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { createBook } from "@/lib/books/add"
+import { createItem } from "@/lib/items/create"
 import { FilePlus } from "lucide-react"
 
-export function AddBookDialog() {
-    const handleSubmit = async (formData: FormData) => {
-        const book = {
-            isbn: formData.get("isbn") as string,
-            name: formData.get("title") as string,
-        };
-        await createBook(book);
-        onBookCreated();
-        //if (props.onBookCreated) {
-        //    props.onBookCreated();
-        //}
+export function AddItemDialog(props: {
+    onItemCreated?: () => void,
+    isbn: string,
+}) {
+    const handleSubmit = async (formData: FormData, isbn: string) => {
+        await createItem(isbn, formData.get("id") as string);
+        if (props.onItemCreated) {
+            props.onItemCreated();
+        }
     };
 
     return (
@@ -34,7 +33,7 @@ export function AddBookDialog() {
             <DialogTrigger asChild>
                 <Button>
                     <FilePlus />
-                    Add Book
+                    Add Item
                 </Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
@@ -42,14 +41,13 @@ export function AddBookDialog() {
                     onSubmit={e => {
                         e.preventDefault();
                         const formData = new FormData(e.currentTarget);
-                        handleSubmit(formData);
+                        handleSubmit(formData, props.isbn);
                     }}
                 >
                     <DialogHeader>
-                        <DialogTitle>New Book</DialogTitle>
+                        <DialogTitle>New Item</DialogTitle>
                         <DialogDescription>
-                            Scan or write the ISBN of the book (without dashes or spaces).<br />
-                            Enter the Title.<br />
+                            Scan or write the Id of the Item (from the label ... starting with RSV...).<br />
                             Click save when you&apos;re done.
                         </DialogDescription>
                     </DialogHeader>
@@ -75,11 +73,4 @@ export function AddBookDialog() {
             </DialogContent>
         </Dialog>
     )
-}
-
-function onBookCreated() {
-    // Refresh the page or data after a book is edited
-    if (typeof window !== "undefined") {
-        window.location.reload();
-    }
 }

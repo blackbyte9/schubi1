@@ -9,7 +9,7 @@ interface BookTableProps<TData> {
 }
 
 export function BookTable<TData extends Book[]>({
-  data,
+  data
 }: BookTableProps<TData>) {
   return (
     <DataTable columns={columns}
