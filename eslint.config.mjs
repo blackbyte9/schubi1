@@ -64,6 +64,10 @@ const eslintConfig = [
 ], // Enforce file names to be in kebab-case
       "unicorn/no-abusive-eslint-disable": "error", // Disallow abusive eslint-disable comments
       "unicorn/prefer-top-level-await": "warn", // Prefer top-level await
+      "unicorn/better-regex": "warn", // Suggest using better regex patterns
+      "unicorn/template-indent": "error", // Enforce consistent indentation in template literals
+      "unicorn/no-array-for-each": "error", // Disallow the use of Array.prototype.forEach
+      "unicorn/no-useless-undefined": "error", // Disallow unnecessary use of undefined
     },
   },
 ];
