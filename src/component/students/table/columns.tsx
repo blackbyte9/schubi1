@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import { SortingHeader } from "@/component/table/sortingHeader"
-import { ColumnDef } from "@tanstack/react-table"
-import { Student } from "lib/students/types"
+import { SortingHeader } from "@/component/table/sortingHeader";
+import { ColumnDef } from "@tanstack/react-table";
+import { Student } from "lib/students/types";
 
 export const columns: ColumnDef<Student>[] = [
   {
@@ -21,4 +21,4 @@ export const columns: ColumnDef<Student>[] = [
     accessorKey: "course",
     header: ({ column }) => SortingHeader({ column, title: "Course" }),
   }
-]
+];

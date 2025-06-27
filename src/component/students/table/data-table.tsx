@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import { columns } from "@/component/students/table/columns"
-import { DataTable } from "@/component/table/dataTable"
-import { Student } from "@/lib/students/types"
+import { columns } from "@/component/students/table/columns";
+import { DataTable } from "@/component/table/dataTable";
+import { Student } from "@/lib/students/types";
 
 interface LeaseTableProps<TData> {
   data: TData extends Student[] ? TData : Student[]
@@ -15,9 +15,9 @@ export function StudentTable<TData extends Student[]>({
     <DataTable columns={columns}
       data={data}
       rowClickHandler={(row) => {
-        const original = row.original as Record<string, unknown>
-        return `/students/${(original as { id: string }).id}` // Adjust the path as needed
+        const original = row.original as Record<string, unknown>;
+        return `/students/${(original as { id: string }).id}`; // Adjust the path as needed
       }} />
 
-  )
+  );
 }

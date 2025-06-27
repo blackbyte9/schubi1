@@ -2,7 +2,6 @@
 
 import { Book, PrismaClient } from '@/lib/prisma/client';
 
-
 const prisma = new PrismaClient();
 
 export async function updateBook(book: Book): Promise<Book | null> {

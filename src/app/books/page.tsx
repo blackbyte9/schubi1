@@ -1,4 +1,4 @@
-import { AddBookDialog } from '@/component/books/detail/AddBook';
+import { AddBookDialog } from '@/component/books/add-book';
 import { BookTable } from '@/component/books/table/data-table';
 import { readBooks } from '@/lib/books/read';
 

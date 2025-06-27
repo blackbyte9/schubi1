@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
     Dialog,
     DialogClose,
@@ -10,26 +10,33 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger,
-} from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { createItem } from "@/lib/items/create"
-import { FilePlus } from "lucide-react"
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { updateBook } from "@/lib/books/update";
+import { Pen } from "lucide-react";
 
-export function AddItemDialog(props: {
-    isbn: string,
+export function EditBookDialog(props: {
+    onBookEdited?: () => void,
+    bookData: { isbn: string, title: string }
 }) {
-    const handleSubmit = async (formData: FormData, isbn: string) => {
-        await createItem(isbn, formData.get("id") as string);
-        onItemCreated();
+    const handleSubmit = async (formData: FormData) => {
+        const book = {
+            isbn: props.bookData.isbn as string,
+            name: formData.get("title") as string,
+        };
+        await updateBook(book);
+        if (props.onBookEdited) {
+            props.onBookEdited();
+        }
     };
 
     return (
         <Dialog>
             <DialogTrigger asChild>
                 <Button>
-                    <FilePlus />
-                    Add Item
+                    <Pen />
+                    Edit
                 </Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
@@ -37,20 +44,24 @@ export function AddItemDialog(props: {
                     onSubmit={e => {
                         e.preventDefault();
                         const formData = new FormData(e.currentTarget);
-                        handleSubmit(formData, props.isbn);
+                        handleSubmit(formData);
                     }}
                 >
                     <DialogHeader>
-                        <DialogTitle>New Item</DialogTitle>
+                        <DialogTitle>Edit Book</DialogTitle>
                         <DialogDescription>
-                            Scan or write the Id of the Item (from the label ... starting with RSV...).<br />
+                            The ISBN is not editable<br />
                             Click save when you&apos;re done.
                         </DialogDescription>
                     </DialogHeader>
                     <div className="grid gap-4">
                         <div className="grid gap-3">
-                            <Label htmlFor="id">Item Id</Label>
-                            <Input id="id" name="id" defaultValue="" />
+                            <Label htmlFor="isbn">ISBN</Label>
+                            <Input disabled id="isbn" name="isbn" defaultValue={props.bookData.isbn} />
+                        </div>
+                        <div className="grid gap-3">
+                            <Label htmlFor="title">Title</Label>
+                            <Input id="title" name="title" defaultValue={props.bookData.title} />
                         </div>
                     </div>
                     <DialogFooter>
@@ -64,12 +75,5 @@ export function AddItemDialog(props: {
                 </form>
             </DialogContent>
         </Dialog>
-    )
-}
-
-function onItemCreated() {
-    // Refresh the page or data after a book is edited
-    if (typeof window !== "undefined") {
-        window.location.reload();
-    }
+    );
 }

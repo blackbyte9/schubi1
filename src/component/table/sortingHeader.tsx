@@ -1,8 +1,9 @@
-import { Button } from "@/components/ui/button"
-import { ArrowUpDown } from "lucide-react"
+import { Button } from "@/components/ui/button";
+import { ArrowUpDown } from "lucide-react";
 
 type SortingHeaderProps = {
   column: {
+    // eslint-disable-next-line no-unused-vars
     toggleSorting: (desc: boolean) => void;
     getIsSorted: () => "asc" | "desc" | false;
   };
@@ -18,5 +19,5 @@ export const SortingHeader = ({ column, title }: SortingHeaderProps) => {
           {title}
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
-      )
-    }
+      );
+    };

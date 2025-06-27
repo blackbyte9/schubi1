@@ -1,5 +1,5 @@
-import { BookDetailCard } from '@/component/books/detail/card';
-import { AddItemDialog } from '@/component/items/detail/AddItem';
+import { BookDetailCard } from '@/component/books/card';
+import { AddItemDialog } from '@/component/items/add-item';
 import { ItemTable } from '@/component/items/table/data-table';
 import { readItemsByIsbn } from '@/lib/items/read';
 

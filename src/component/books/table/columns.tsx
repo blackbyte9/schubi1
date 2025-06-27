@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import { SortingHeader } from "@/component/table/sortingHeader"
-import { ColumnDef } from "@tanstack/react-table"
-import { Book } from "lib/books/types"
-import { EditBookDialog } from '../detail/EditBook';
+import { SortingHeader } from "@/component/table/sortingHeader";
+import { ColumnDef } from "@tanstack/react-table";
+import { Book } from "lib/books/types";
+import { EditBookDialog } from '../edit-book';
 
 export const columns: ColumnDef<Book>[] = [
   {
@@ -42,7 +42,7 @@ export const columns: ColumnDef<Book>[] = [
       </div>
     ),
   },
-]
+];
 
 function onBookEdited() {
   // Refresh the page or data after a book is edited

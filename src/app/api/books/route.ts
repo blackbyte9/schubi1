@@ -1,4 +1,4 @@
-import { auth } from "@/auth"
+import { auth } from "@/auth";
 import { readBooks } from "@/lib/books/read";
 
 export const GET = auth(async (req) => {
@@ -7,5 +7,5 @@ export const GET = auth(async (req) => {
     return Response.json(books.sort((a, b) => a.isbn.localeCompare(b.isbn)));
   }
 
-  return Response.json({ message: "Not authenticated" }, { status: 401 })
-})
+  return Response.json({ message: "Not authenticated" }, { status: 401 });
+});

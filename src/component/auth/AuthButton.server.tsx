@@ -8,7 +8,7 @@ export default async function AuthButton() {
         session.user = {
             name: session.user.name,
             email: session.user.email,
-        }
+        };
     }
     return (
         <SessionProvider session={session} basePath={BASE_PATH}>

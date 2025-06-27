@@ -16,8 +16,10 @@ export default function AuthButton() {
             } catch (error) {
                 if (isRedirectError(error)) {
                     // Handle redirect error
+                    // eslint-disable-next-line no-console
                     console.error("Redirect error:", error);
                 } else {
+                    // eslint-disable-next-line no-console
                     console.error("Sign out error:", error);
                 }
             }

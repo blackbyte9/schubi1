@@ -1,9 +1,9 @@
 import { DetailCard } from "@/component/detail/card";
-import { StudentTitle } from "../title";
+import { StudentTitle } from "./title";
 import { getStudentById } from "@/lib/students/data";
 
 export async function StudentDetailCard({ params }: { params: { id: string | string[] } }) {
-    const { id } = await params
+    const { id } = await params;
 
     const student = await getStudentById(+id);
     if (!student) {
@@ -24,5 +24,5 @@ export async function StudentDetailCard({ params }: { params: { id: string | str
                 <div>Course: {student.course}</div>
             </DetailCard>
         </div>
-    )
+    );
 }

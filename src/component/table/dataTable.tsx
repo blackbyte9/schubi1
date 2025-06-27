@@ -1,7 +1,6 @@
-"use client"
+"use client";
 
-
-import * as React from "react"
+import * as React from "react";
 
 import {
   ColumnDef,
@@ -13,7 +12,7 @@ import {
   Row,
   SortingState,
   useReactTable,
-} from "@tanstack/react-table"
+} from "@tanstack/react-table";
 
 import {
   Table,
@@ -22,15 +21,16 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
-import { useRouter } from "next/navigation"
-import { DataTablePagination } from "./pagination"
-import { useState } from "react"
-import { Input } from "@/components/ui/input"
+} from "@/components/ui/table";
+import { useRouter } from "next/navigation";
+import { DataTablePagination } from "./pagination";
+import { useState } from "react";
+import { Input } from "@/components/ui/input";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
+  // eslint-disable-next-line no-unused-vars
   rowClickHandler?: (row: Row<TData>) => string
 }
 
@@ -39,7 +39,7 @@ export function DataTable<TData, TValue>({
   data,
   rowClickHandler,
 }: DataTableProps<TData, TValue>) {
-  const router = useRouter()
+  const router = useRouter();
   const [pagination, setPagination] = useState({
     pageIndex: 0, //initial page index
     pageSize: 10, //default page size
@@ -63,7 +63,7 @@ export function DataTable<TData, TValue>({
       sorting,
       globalFilter,
     },
-  })
+  });
 
   return (
     <div className="rounded-md border">
@@ -88,7 +88,7 @@ export function DataTable<TData, TValue>({
                         header.getContext()
                       )}
                   </TableHead>
-                )
+                );
               })}
             </TableRow>
           ))}
@@ -120,5 +120,5 @@ export function DataTable<TData, TValue>({
       </Table>
       <DataTablePagination table={table} />
     </div>
-  )
+  );
 }

@@ -1,7 +1,6 @@
-"use client"
+"use client";
 
-
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
     Dialog,
     DialogClose,
@@ -11,33 +10,28 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger,
-} from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { updateBook } from "@/lib/books/update"
-import { Pen } from "lucide-react"
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { createBook } from "@/lib/books/add";
+import { FilePlus } from "lucide-react";
 
-export function EditBookDialog(props: {
-    onBookEdited?: () => void,
-    bookData: { isbn: string, title: string }
-}) {
+export function AddBookDialog() {
     const handleSubmit = async (formData: FormData) => {
         const book = {
-            isbn: props.bookData.isbn as string,
+            isbn: formData.get("isbn") as string,
             name: formData.get("title") as string,
         };
-        await updateBook(book);
-        if (props.onBookEdited) {
-            props.onBookEdited();
-        }
+        await createBook(book);
+        onBookCreated();
     };
 
     return (
         <Dialog>
             <DialogTrigger asChild>
                 <Button>
-                    <Pen />
-                    Edit
+                    <FilePlus />
+                    Add Book
                 </Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
@@ -49,20 +43,21 @@ export function EditBookDialog(props: {
                     }}
                 >
                     <DialogHeader>
-                        <DialogTitle>Edit Book</DialogTitle>
+                        <DialogTitle>New Book</DialogTitle>
                         <DialogDescription>
-                            The ISBN is not editable<br />
+                            Scan or write the ISBN of the book (without dashes or spaces).<br />
+                            Enter the Title.<br />
                             Click save when you&apos;re done.
                         </DialogDescription>
                     </DialogHeader>
                     <div className="grid gap-4">
                         <div className="grid gap-3">
                             <Label htmlFor="isbn">ISBN</Label>
-                            <Input disabled id="isbn" name="isbn" defaultValue={props.bookData.isbn} />
+                            <Input id="isbn" name="isbn" defaultValue="" />
                         </div>
                         <div className="grid gap-3">
                             <Label htmlFor="title">Title</Label>
-                            <Input id="title" name="title" defaultValue={props.bookData.title} />
+                            <Input id="title" name="title" defaultValue="" />
                         </div>
                     </div>
                     <DialogFooter>
@@ -76,5 +71,12 @@ export function EditBookDialog(props: {
                 </form>
             </DialogContent>
         </Dialog>
-    )
+    );
+}
+
+function onBookCreated() {
+    // Refresh the page or data after a book is edited
+    if (typeof window !== "undefined") {
+        window.location.reload();
+    }
 }

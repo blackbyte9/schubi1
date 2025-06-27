@@ -20,7 +20,7 @@ const authOptions: NextAuthConfig = {
                         password: "admin",
                         email: "admin@donotreplay.com",
                     },
-                ]
+                ];
 
                 const user = users.find(
                     (user) =>
@@ -40,6 +40,6 @@ const authOptions: NextAuthConfig = {
     ],
     basePath: BASE_PATH,
     secret: process.env.NEXTAUTH_SECRET,
-}
+};
 
 export const { handlers, auth, signIn, signOut } = NextAuth(authOptions);
