@@ -1,5 +1,5 @@
 import { auth } from "@/auth";
-import WhoAmIServerAction from "@/component/auth/WhoAmI.client";
+import WhoAmIServerAction from "@/component/auth/who-am-i.client";
 
 export default async function Page() {
   const session = await auth();

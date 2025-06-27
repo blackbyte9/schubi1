@@ -1,6 +1,6 @@
 "use client";
 
-import { SortingHeader } from "@/component/table/sortingHeader";
+import { SortingHeader } from "@/component/table/sorting-header";
 import { ColumnDef } from "@tanstack/react-table";
 import { Student } from "lib/students/types";
 

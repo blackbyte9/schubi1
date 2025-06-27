@@ -1,7 +1,7 @@
 "use client";
 
 import { columns } from "@/component/items/table/columns";
-import { DataTable } from "@/component/table/dataTable";
+import { DataTable } from "@/component/table/data-table";
 import { Item } from "@/lib/items/types";
 
 interface ItemTableProps<TData> {

@@ -1,6 +1,6 @@
 "use client";
 
-import { SortingHeader } from "@/component/table/sortingHeader";
+import { SortingHeader } from "@/component/table/sorting-header";
 import { ColumnDef } from "@tanstack/react-table";
 import { Item } from "lib/items/types";
 

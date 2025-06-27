@@ -1,7 +1,7 @@
 "use client";
 
 import { columns } from "@/component/leases/table/columns";
-import { DataTable } from "@/component/table/dataTable";
+import { DataTable } from "@/component/table/data-table";
 import { Lease } from "@/lib/leases/types";
 
 interface LeaseTableProps<TData> {

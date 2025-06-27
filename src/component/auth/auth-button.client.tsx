@@ -1,5 +1,6 @@
 "use client";
 import { signIn, signOut } from "@/auth/helpers";
+import { Button } from "@/components/ui/button";
 import { useSession } from "next-auth/react";
 import { isRedirectError } from "next/dist/client/components/redirect-error";
 import { useRouter } from "next/navigation";
@@ -9,7 +10,7 @@ export default function AuthButton() {
     const router = useRouter();
 
     return session?.user ? (
-        <button onClick={async () => {
+        <Button onClick={async () => {
                 await signOut({ redirect: false });
             try {
                 await router.push("/api/auth/signin");
@@ -25,11 +26,11 @@ export default function AuthButton() {
             }
         }}>
             {session.user?.name} Sign out
-        </button>
+        </Button>
     ) : (
-        <button onClick={async () => { await signIn(); }}>
+        <Button onClick={async () => { await signIn(); }}>
             Sign in
-        </button>
+        </Button>
 
     );
 }

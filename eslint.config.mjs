@@ -1,6 +1,7 @@
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 import { FlatCompat } from "@eslint/eslintrc";
+import eslintPluginUnicorn from 'eslint-plugin-unicorn';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -35,7 +36,7 @@ const eslintConfig = [
       "react/react-in-jsx-scope": "off", // Not needed with Next.js
       "react/jsx-uses-react": "off", // Not needed with Next.js
       "react/jsx-uses-vars": "error", // Prevent unused variables in JSX
-      "react/no-unescaped-entities": "off", // Allow unescaped entities in JSX 
+      "react/no-unescaped-entities": "off", // Allow unescaped entities in JSX
       "react/no-unknown-property": [
         "error",
         { ignore: ["css", "jsx", "global"] }, // Allow custom properties like `css` and `jsx`
@@ -47,6 +48,22 @@ const eslintConfig = [
       "react-hooks/exhaustive-deps": "warn", // Warn about missing dependencies in useEffect
       "jsx-a11y/anchor-is-valid": "warn", // Warn about invalid anchor tags // Warn about click events on non-interactive elements
       "jsx-a11y/alt-text": "warn", // Warn about missing alt text
+    },
+  },
+  {
+    plugins: {
+      unicorn: eslintPluginUnicorn,
+    },
+    rules: {
+      "unicorn/prefer-module": "off", // Disable the prefer-module rule
+      "unicorn/filename-case": [
+	"error",
+	{
+		"case": "kebabCase"
+	}
+], // Enforce file names to be in kebab-case
+      "unicorn/no-abusive-eslint-disable": "error", // Disallow abusive eslint-disable comments
+      "unicorn/prefer-top-level-await": "warn", // Prefer top-level await
     },
   },
 ];
