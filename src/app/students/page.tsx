@@ -1,8 +1,8 @@
 import { StudentTable } from '@/component/students/table/data-table';
-import { getStudents } from '@/lib/students/data';
+import { readStudents } from '@/lib/students/read';
 
 const Students = async () => {
-    const students = await getStudents();
+    const students = await readStudents();
     if (!students) {
         return <div>No students found</div>;
     }

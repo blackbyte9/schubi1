@@ -1,11 +1,11 @@
 import { DetailCard } from "@/component/detail/card";
 import { StudentTitle } from "./title";
-import { getStudentById } from "@/lib/students/data";
+import { readStudentById } from "@/lib/students/read";
 
 export async function StudentDetailCard({ params }: { params: { id: string | string[] } }) {
     const { id } = await params;
 
-    const student = await getStudentById(+id);
+    const student = await readStudentById(+id);
     if (!student) {
         return <div>Student not found</div>;
     }

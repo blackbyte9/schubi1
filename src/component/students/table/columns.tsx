@@ -20,5 +20,9 @@ export const columns: ColumnDef<Student>[] = [
   {
     accessorKey: "course",
     header: ({ column }) => SortingHeader({ column, title: "Course" }),
-  }
+  },
+  {
+    accessorKey: "leases",
+    header: ({ column }) => SortingHeader({ column, title: "Leased items" }),
+  },
 ];

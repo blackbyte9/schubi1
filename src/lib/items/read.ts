@@ -72,3 +72,23 @@ export async function readLeasedItemsByIsbn(isbn: string): Promise<Item[]> {
     status: status as Status
   }));
 }
+
+export async function readLeasedItemsByStudent(studentId: number): Promise<Item[]> {
+  const items = await prisma.item.findMany({
+    where: {
+      Borrow: {
+        some: {
+          studentId,
+          active: true
+        }
+      },
+      status: { not: Status.REMOVED }
+    },
+  });
+  // Map DB fields to Item type
+  return items.map(({ id, isbn, status }) => ({
+    isbn,
+    id,
+    status: status as Status
+  }));
+}

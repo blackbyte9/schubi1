@@ -1,9 +1,9 @@
 import { auth } from "@/auth";
-import { getStudents } from "@/lib/students/data";
+import { readStudents } from "@/lib/students/read";
 
 export const GET = auth(async (req) => {
   if (req.auth) {
-    const items = await getStudents();
+    const items = await readStudents();
     return Response.json(items.sort((a, b) => a.id - b.id));
   }
 
