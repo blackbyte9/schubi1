@@ -1,15 +1,15 @@
 
 import { LeaseTable } from "@/component/leases/table/data-table";
-import { StudentDetailCard } from "@/component/students/card";
-import { getLeasesByStudent } from "@/lib/leases/data";
+import StudentDetail from "@/component/students/detail-student";
+import { readLeasesByStudent } from "@/lib/leases/read";
 
-export default async function Page({ params }: { params: { id: string | string[] } }) {
+export default async function Page({ params }: { params: { id: number } }) {
     const { id } = await params;
-    const leases = await getLeasesByStudent(+id);
+    const leases = await readLeasesByStudent(+id);
 
     return (
         <div>
-            <StudentDetailCard params={{ id: id }} />
+            <StudentDetail id={id} />
 
             <LeaseTable data={leases ?? []} />
         </div>

@@ -1,7 +1,7 @@
 import { prisma } from "../prisma";
 import { Lease } from "./types";
 
-export async function getLeasesByStudent(id: number): Promise<Lease[]> {
+export async function readLeasesByStudent(id: number): Promise<Lease[]> {
   const dbLeases = await prisma.borrow.findMany({
     where: { studentId: id },
   });
@@ -10,7 +10,7 @@ export async function getLeasesByStudent(id: number): Promise<Lease[]> {
   return dbLeases.map(({ id, itemId, studentId, active, leased, returned }) => ({ id, item: itemId, student: studentId, active, leased, returned }));
 }
 
-export async function getLeasesByItem(id: string): Promise<Lease[]> {
+export async function readLeasesByItem(id: string): Promise<Lease[]> {
   const dbLeases = await prisma.borrow.findMany({
     where: { itemId: id },
   });
@@ -18,7 +18,7 @@ export async function getLeasesByItem(id: string): Promise<Lease[]> {
   return dbLeases.map(({ id, itemId, studentId, active, leased, returned }) => ({ id, item: itemId, student: studentId, active, leased, returned }));
 }
 
-export async function getActiveLeasesByItem(id: string): Promise<Lease[]> {
+export async function readActiveLeasesByItem(id: string): Promise<Lease[]> {
   const dbLeases = await prisma.borrow.findMany({
     where: { itemId: id, active: true },
   });
@@ -26,7 +26,7 @@ export async function getActiveLeasesByItem(id: string): Promise<Lease[]> {
   return dbLeases.map(({ id, itemId, studentId, active, leased, returned }) => ({ id, item: itemId, student: studentId, active, leased, returned }));
 }
 
-export async function getActiveLeasesByStudent(id: number): Promise<Lease[]> {
+export async function readActiveLeasesByStudent(id: number): Promise<Lease[]> {
   const dbLeases = await prisma.borrow.findMany({
     where: { studentId: id, active: true, },
   });

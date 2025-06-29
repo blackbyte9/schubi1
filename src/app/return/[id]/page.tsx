@@ -1,19 +1,17 @@
 
 import { ItemInput } from "@/component/items/item-input";
-import { LeaseTable } from "@/component/leases/table/data-table";
-import { StudentDetailCard } from "@/component/students/card";
-import { getActiveLeasesByStudent } from "@/lib/leases/data";
+import { LeasesByStudentTable } from "@/component/leases/show-lease";
+import StudentDetail from "@/component/students/detail-student";
 
-export default async function Page({ params }: { params: { id: string | string[] } }) {
+export default async function Page({ params }: { params: { id: number } }) {
     const { id } = await params;
-    const leases = await getActiveLeasesByStudent(+id);
 
     return (
         <div>
-            <StudentDetailCard params={{ id: id }} />
+            <StudentDetail id={id} />
             <ItemInput option={"return"} />
             <br />
-            <LeaseTable data={leases ?? []} />
+            <LeasesByStudentTable id={+id} />
         </div>
     );
 };

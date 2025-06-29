@@ -1,12 +1,12 @@
 import { ItemInput } from "@/component/items/item-input";
-import { StudentDetailCard } from "@/component/students/card";
+import StudentDetail from "@/component/students/detail-student";
 
 const Return = async () => {
 
     return (
         <div>
             <h2>Return Items</h2>
-            <StudentDetailCard params={{ id: "" }} />
+            <StudentDetail id={-1} />
             <ItemInput option={"return"} />
         </div>
     );

@@ -1,14 +1,15 @@
-import { ItemDetailCard } from '@/component/items/card';
-import { LeaseTable } from '@/component/leases/table/data-table';
-import { getLeasesByItem } from '@/lib/leases/data';
 
-export default async function Page({ params }: { params: { id: string | string[] } }) {
+import ItemDetail from '@/component/items/detail-item';
+import { LeaseTable } from '@/component/leases/table/data-table';
+import { readLeasesByItem } from '@/lib/leases/read';
+
+export default async function Page({ params }: { params: { id: string } }) {
     const { id } = await params;
-    const leases = await getLeasesByItem(Array.isArray(id) ? id[0] : id);
+    const leases = await readLeasesByItem(Array.isArray(id) ? id[0] : id);
 
     return (
         <div>
-            <ItemDetailCard params={{ id: id }} />
+            <ItemDetail id={id} />
             <LeaseTable data={leases ?? []} />
         </div>
     );

@@ -1,10 +1,7 @@
 import { AddBookDialog } from '@/component/books/add-book';
-import { BookTable } from '@/component/books/table/data-table';
-import { readBooks } from '@/lib/books/read';
+import AllBooksTable from '@/component/books/show-book';
 
-export default async function Page() {
-
-    const books = await readBooks();
+export default function Page() {
 
     return (
         <div>
@@ -12,7 +9,7 @@ export default async function Page() {
             <div className="flex justify-end mb-4">
                 <AddBookDialog />
             </div>
-            <BookTable data={books} />
+            <AllBooksTable />
         </div>
     );
 };

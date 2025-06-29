@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { Input } from "@/components/ui/input";
-import { returnItem } from "@/lib/leases/return-item";
+import { returnItem } from "@/lib/leases/update";
 import { useRouter } from "next/navigation";
 
 interface ItemInputProps {

@@ -1,15 +1,10 @@
-import { StudentTable } from '@/component/students/table/data-table';
-import { readStudents } from '@/lib/students/read';
+import AllStudentsTable from '@/component/students/show-student';
 
 const Students = async () => {
-    const students = await readStudents();
-    if (!students) {
-        return <div>No students found</div>;
-    }
     return (
         <div>
             <h2>Students</h2>
-            <StudentTable data={students} />
+            <AllStudentsTable />
         </div>
     );
 };

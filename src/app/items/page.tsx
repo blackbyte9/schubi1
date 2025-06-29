@@ -1,15 +1,11 @@
-import { ItemTable } from '@/component/items/table/data-table';
-import { readItems } from '@/lib/items/read';
+import AllItemsTable from '@/component/items/show-item';
 
-const Items = async () => {
-    const items = await readItems();
+export default function Page() {
 
     return (
         <div>
             <h2>Items</h2>
-            <ItemTable data={items} />
+            <AllItemsTable />
         </div>
     );
 };
-
-export default Items;

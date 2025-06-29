@@ -1,11 +1,11 @@
 "use server";
 
 import { prisma } from "@/prisma";
-import { getActiveLeasesByItem } from "./data";
+import { readActiveLeasesByItem } from "./read";
 
 export async function returnItem(input: string): Promise<{ ok: boolean; message: string; student: string }> {
     'use server';
-    const item = await getActiveLeasesByItem(input);
+    const item = await readActiveLeasesByItem(input);
     if (item.length === 0 || item[0].active === false) {
         return {
             ok: false,
