@@ -1,6 +1,7 @@
 "use server";
 
-import { Book, PrismaClient } from '@/lib/prisma/client';
+import { PrismaClient } from '@/lib/prisma/client';
+import { Book } from './types';
 
 const prisma = new PrismaClient();
 
